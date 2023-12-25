@@ -29,6 +29,7 @@ class ProductViewSet(ViewSet):
         """
         # get request data
         data= request.data
+        print(request)
         serializer=ProductSerializer(data=data)
 
       

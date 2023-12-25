@@ -33,6 +33,7 @@ class SaleViewSet(ViewSet):
         """create a sale instance - should reduce a product quantity"""
 
         data= request.data
+        
         # print(data)
         product_id=kwargs.get("id")
 

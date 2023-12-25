@@ -8,13 +8,14 @@ from Sale.serializers import SalesSerializer
 
 class ProductSerializer(ModelSerializer):
     sales= SalesSerializer(many=True, read_only=True)
+    image_url=SerializerMethodField(read_only=True)
 
 
     class Meta:
         model=Product
         fields=(
                 "id",
-                "image",
+                "image_url",
                 "name", 
                 "quantity", 
                 "buying_price", 
@@ -23,7 +24,8 @@ class ProductSerializer(ModelSerializer):
                 "sales"
             )
 
-
+    def get_image_url(self, instance):
+        return instance.image.url
 
 
    
