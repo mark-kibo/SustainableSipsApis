@@ -1,9 +1,31 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from .models import Product
+from datetime import datetime
+from Sale.serializers import SalesSerializer
+
+
+
 
 class ProductSerializer(ModelSerializer):
+    sales= SalesSerializer(many=True, read_only=True)
+
+
     class Meta:
         model=Product
-        fields="__all__"
+        fields=(
+                "id",
+                "image",
+                "name", 
+                "quantity", 
+                "buying_price", 
+                "selling_price", 
+                "description" ,
+                "sales"
+            )
 
-        
+
+
+
+   
+
+
