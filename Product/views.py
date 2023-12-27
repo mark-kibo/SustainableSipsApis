@@ -4,12 +4,14 @@ from rest_framework.viewsets import ViewSet
 from .models import Product
 from .serializers import ProductSerializer
 import uuid
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 # Create your views here.
 
 
 class ProductViewSet(ViewSet):
 
     queryset=Product.objects.all()
+    permission_classes=[IsAuthenticatedOrReadOnly]
     
     def list_products(self, request):
         """
@@ -42,6 +44,7 @@ class ProductViewSet(ViewSet):
 class ProductMutationViewSet(ViewSet):
 
     queryset=Product.objects.all()
+    permission_classes=[IsAuthenticatedOrReadOnly]
 
     def list_product(self, request, **kwargs):
         """get an instance of a product"""

@@ -5,12 +5,14 @@ from rest_framework.viewsets import ViewSet
 from Product.models import Product
 from Product.serializers import ProductSerializer
 from .serializers import SalesSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import uuid
 # Create your views here.
 
 
 class ListAllSalesViewSet(ViewSet):
     queryset = Sale.objects.all()
+    permission_classes=[IsAuthenticatedOrReadOnly]
     
 
     def list_sales(self, request):
@@ -28,6 +30,7 @@ class ListAllSalesViewSet(ViewSet):
 class SaleViewSet(ViewSet):
 
     queryset=Sale.objects.all()
+    permission_classes=[IsAuthenticatedOrReadOnly]
 
     def create_sale(self, request, **kwargs):
         """create a sale instance - should reduce a product quantity"""
