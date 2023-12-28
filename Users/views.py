@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 class RolesViewSet(viewsets.ModelViewSet):
     queryset = Roles.objects.all()
+    
     serializer_class = RolesSerializer
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -34,7 +34,7 @@ class User(AbstractBaseUser, models.Model):
         editable=False
     )
     username= models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20,unique=True)
     role = models.ForeignKey('Roles', on_delete=models.SET_NULL, null=True, blank=True)
 
 
