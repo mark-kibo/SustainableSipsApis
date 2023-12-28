@@ -135,7 +135,7 @@ MEDIA_URL = '/media/'
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# AUTH_USER_MODEL = "Users.SustainableSipsUser"
+AUTH_USER_MODEL = "Users.SustainableUser"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

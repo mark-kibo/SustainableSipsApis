@@ -1,6 +1,6 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Roles, User
+from .models import Roles, SustainableUser
 
 class RolesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,5 +9,5 @@ class RolesSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['user_id', 'username', 'phone_number', 'role']
+        model = SustainableUser
+        fields = ['user_id','username',  'phone_number', 'role']
