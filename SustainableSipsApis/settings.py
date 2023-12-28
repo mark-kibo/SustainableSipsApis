@@ -16,6 +16,7 @@ import os
 import cloudinary
 import cloudinary.api
 import cloudinary.uploader
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,12 +86,19 @@ WSGI_APPLICATION = 'SustainableSipsApis.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
+# # local development
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# # production
+# DATABASES = {
+#     'default': dj_database_url.parse("postgresql://sustainable_apis_user:uUITpanrQAYE0X4Ig5IillD2FjXqkSKx@dpg-cm6gr27qd2ns73etp670-a.oregon-postgres.render.com/sustainable_apis")
+# }
 
 
 REST_FRAMEWORK = {
