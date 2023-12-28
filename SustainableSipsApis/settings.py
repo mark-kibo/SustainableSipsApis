@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
+import cloudinary
+import cloudinary.api
+import cloudinary.uploader
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +31,7 @@ SECRET_KEY = 'django-insecure-&m12)^42c)5)$+ql=4b2oz7k-i!kcz$#rrr1b8acnq776%_243
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,10 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "Sale",
     'Product',
     'Users',
     'rest_framework_simplejwt',
     'rest_framework',
+    'cloudinary',
+    'drf_spectacular'
+
 ]
 
 MIDDLEWARE = [
@@ -78,6 +87,8 @@ WSGI_APPLICATION = 'SustainableSipsApis.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
+# # local development
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -85,15 +96,25 @@ DATABASES = {
     }
 }
 
+# # production
+# DATABASES = {
+#     'default': dj_database_url.parse("postgresql://sustainable_apis_user:uUITpanrQAYE0X4Ig5IillD2FjXqkSKx@dpg-cm6gr27qd2ns73etp670-a.oregon-postgres.render.com/sustainable_apis")
+# }
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS':'drf_spectacular.openapi.AutoSchema'
 }
 
+
+SPECTACULAR_SETTINGS={
+    "Title": "Sustainable sips apis"
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -135,8 +156,15 @@ MEDIA_URL = '/media/'
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-AUTH_USER_MODEL = "Users.SustainableUser"
+AUTH_USER_MODEL = "Users.SustainableSipsUser"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+cloudinary.config( 
+  cloud_name = "dsp3koxbb", 
+  api_key = "712128876688431", 
+  api_secret = "uBHazNFklotm0DLSNbS_0AdgAJ4" 
+)
