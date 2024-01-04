@@ -63,47 +63,16 @@ class Roles(models.Model):
 
 
 
-
-
-class SustainableSipsUser(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, models.Model):
     user_id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False
     )
-    username= models.CharField(max_length=255, unique=True, null=True, blank=True, default='')
-    email= models.EmailField(max_length=255, unique=True, blank=False)
-    password= models.CharField(max_length=255, unique=True)
+    username= models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
     role = models.ForeignKey('Roles', on_delete=models.SET_NULL, null=True, blank=True)
 
-    date_joined=models.DateTimeField(default=timezone.now)
-    date_joined=models.DateTimeField(blank=True, null=True)
-
-    is_staff=models.BooleanField(default=False)
-    is_active=models.BooleanField(default=True)
-    is_anonymous=models.BooleanField(default=False)
-    is_authenticated=models.BooleanField(default=True)
-    
-    objects = CustomUserManager()
-
-    USERNAME_FIELD = 'email'
-    EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
-
-    objects=UserManager()
-
-    USERNAME_FIELD='username'
-    EMAIL_FIELD='email'
-    # PASSWORD_FIELD='password'
-    REQUIRED_FIELDS=[]
-
-
-  
 
     def set_password_hash(self, plain_password):
         self.password = make_password(plain_password)
