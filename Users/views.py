@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Roles, User
+from .models import Roles, OasisUser
 from .serializers import RolesSerializer, UserSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import permissions
@@ -13,13 +13,13 @@ class RolesViewSet(viewsets.ModelViewSet):
     serializer_class = RolesSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = OasisUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
-# JWT class to handle JWT token creating and refreshing
-class MyTokenObtainPairView(TokenObtainPairView):
-    permission_classes = (permissions.IsAuthenticated,)
+# # JWT class to handle JWT token creating and refreshing
+# class MyTokenObtainPairView(TokenObtainPairView):
+#     permission_classes = (permissions.IsAuthenticated,)
 
-class MyTokenRefreshView(TokenRefreshView):
-    permission_classes = (permissions.IsAuthenticated,)
+# class MyTokenRefreshView(TokenRefreshView):
+#     permission_classes = (permissions.IsAuthenticated,)
