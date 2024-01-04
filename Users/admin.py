@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import SustainableSipsUser, Roles
+from .models import User, Roles
 # Register your models here.
 
 
-admin.site.register(SustainableSipsUser)
+admin.site.register(User)
 admin.site.register(Roles)
