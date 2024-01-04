@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Roles, SustainableUser
+from .models import Roles, User
 from .serializers import RolesSerializer, UserSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import permissions
@@ -13,7 +13,7 @@ class RolesViewSet(viewsets.ModelViewSet):
     serializer_class = RolesSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = SustainableUser.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
