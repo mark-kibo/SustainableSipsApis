@@ -17,6 +17,7 @@ class ProductSerializer(ModelSerializer):
                 "id",
                 "image_url",
                 "name", 
+                "category",
                 "quantity", 
                 "buying_price", 
                 "selling_price", 

@@ -50,10 +50,11 @@ INSTALLED_APPS = [
     "Sale",
     'Product',
     'Users',
+    "Common",
     'rest_framework_simplejwt',
     'rest_framework',
     'cloudinary',
-    'drf_spectacular'
+    'drf_spectacular',
 
 ]
 

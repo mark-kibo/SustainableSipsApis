@@ -4,7 +4,7 @@ from rest_framework.viewsets import ViewSet
 from .models import Product
 from .serializers import ProductSerializer
 import uuid
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 # Create your views here.
 
 
@@ -34,7 +34,6 @@ class ProductViewSet(ViewSet):
         print(request)
         serializer=ProductSerializer(data=data)
 
-      
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
