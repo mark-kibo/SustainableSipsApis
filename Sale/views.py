@@ -7,6 +7,7 @@ from Product.serializers import ProductSerializer
 from .serializers import SalesSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import uuid
+from rest_framework.renderers import TemplateHTMLRenderer
 # Create your views here.
 
 
@@ -118,7 +119,19 @@ class SaleViewSet(ViewSet):
         })
 
 
-
     
+        
+    
+class ReceiptViewSet(ViewSet):
+    queryset=Sale.objects.all()
+    render_classes=[TemplateHTMLRenderer]
 
+
+    def generate_receipt(self, request, id):
+        """generate a receipt for a sale"""
+
+        sale= get_object_or_404(Sale, id=id)
+        serializer= SalesSerializer(sale)
+        
+        return Response({'user': serializer.data}, template_name='receipt.html')
 
