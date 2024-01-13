@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 class ProductViewSet(ViewSet):
 
     queryset=Product.objects.all()
-    permission_classes=[IsAuthenticatedOrReadOnly]
+    
     
     def list_products(self, request):
         """
@@ -31,7 +31,8 @@ class ProductViewSet(ViewSet):
         """
         # get request data
         data= request.data
-        print(request)
+        files=request._files
+        print(data, files)
         serializer=ProductSerializer(data=data)
 
         if serializer.is_valid(raise_exception=True):

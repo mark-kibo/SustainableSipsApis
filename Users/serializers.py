@@ -11,3 +11,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = OasisUser
         fields = ['id', 'username',  'phone_number', 'role']
+
+
+class CreateUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OasisUser
+        fields = ['username', 'password', 'phone_number', 'role']
