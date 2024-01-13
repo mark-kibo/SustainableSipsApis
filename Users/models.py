@@ -4,7 +4,9 @@ import uuid
 # from django.contrib.auth.models import UserManager, AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser, UserManager
-
+from django.contrib.auth.hashers import (
+    check_password, is_password_usable, make_password,
+)
 
 
 class CustomUserManager(UserManager):

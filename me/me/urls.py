@@ -1,5 +1,5 @@
 """
-URL configuration for SustainableSipsApis project.
+URL configuration for me project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -15,19 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-# from rest_framework_swagger.views import get_swagger_view
+from django.urls import path
 
-# schema_view = get_swagger_view(title="sustainable sips API")
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/products/", include("Product.urls") ),
-    path("api/user/", include("Users.urls") ),
-    path("api/sales/", include("Sale.urls") ),
-    path("api/common/", include("Common.urls")),
-    # path('api/schema/docs', schema_view),
-
-]+ static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+]
