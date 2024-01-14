@@ -7,6 +7,8 @@ from Product.serializers import ProductSerializer
 from .serializers import SalesSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import uuid
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.core.cache import cache
 
@@ -17,6 +19,7 @@ class ListAllSalesViewSet(ViewSet):
     queryset = Sale.objects.all()
     
 
+    @method_decorator(never_cache)
     def list_sales(self, request):
 
         """get all sales availble"""
@@ -105,6 +108,7 @@ class SaleViewSet(ViewSet):
                 "error":sale_serializer.errors
             })
 
+    @method_decorator(never_cache)
     def get_sale(self, request, **kwargs):
         """get an instance of a sale"""
 
