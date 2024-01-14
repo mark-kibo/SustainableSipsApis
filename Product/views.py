@@ -52,7 +52,7 @@ class ProductViewSet(ViewSet):
 class ProductMutationViewSet(ViewSet):
 
     queryset=Product.objects.all()
-    permission_classes=[IsAuthenticatedOrReadOnly]
+ 
 
     def list_product(self, request, **kwargs):
         """get an instance of a product"""
