@@ -12,7 +12,7 @@ class Product(models.Model):
     category = models.CharField(max_length=255, default="Alcohol")
     quantity = models.IntegerField(default=0)
     buying_price = models.DecimalField(max_digits=10, decimal_places=2)
-    selling_price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)  # Optional description

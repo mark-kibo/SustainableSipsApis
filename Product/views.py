@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from .models import Product
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, CreateProductSerializer
 import uuid
+from django.core.cache import cache
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 # Create your views here.
 
@@ -32,12 +33,19 @@ class ProductViewSet(ViewSet):
         # get request data
         data= request.data
         files=request._files
+        data= data.get("product")
         print(data, files)
-        serializer=ProductSerializer(data=data)
-
+        # print(serializer)
+        serializer=CreateProductSerializer(data=data)
+        print(serializer.is_valid())
+        print(serializer.errors)
         if serializer.is_valid(raise_exception=True):
+            
             serializer.save()
+            cache.clear()
             return Response(serializer.data)
+        
+
         return Response({"errors": serializer.errors})
         
     
@@ -76,10 +84,11 @@ class ProductMutationViewSet(ViewSet):
         
 
             if product:
-                serializer=ProductSerializer(instance=product,
+                serializer=CreateProductSerializer(instance=product,
                                             data=data, partial=True)
                 if serializer.is_valid(raise_exception=True):
                     serializer.save()
+                    cache.clear()
                     return Response(serializer.data)
                 else:
                     return Response({

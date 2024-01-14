@@ -8,12 +8,13 @@ from .serializers import SalesSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import uuid
 from rest_framework.renderers import TemplateHTMLRenderer
+from django.core.cache import cache
+
 # Create your views here.
 
 
 class ListAllSalesViewSet(ViewSet):
     queryset = Sale.objects.all()
-    permission_classes=[IsAuthenticatedOrReadOnly]
     
 
     def list_sales(self, request):
@@ -31,14 +32,13 @@ class ListAllSalesViewSet(ViewSet):
 class SaleViewSet(ViewSet):
 
     queryset=Sale.objects.all()
-    permission_classes=[IsAuthenticatedOrReadOnly]
 
     def create_sale(self, request, **kwargs):
         """create a sale instance - should reduce a product quantity"""
 
         data= request.data
         
-        # print(data)
+        print(data)
         product_id=kwargs.get("id")
 
 
@@ -63,6 +63,7 @@ class SaleViewSet(ViewSet):
                     product.quantity = product.quantity - int(data.get("quantity"))
 
                     product.save()
+                    cache.clear()
 
                     # Serialize and return the updated product
                     product_serializer = ProductSerializer(product)
@@ -97,6 +98,7 @@ class SaleViewSet(ViewSet):
 
         if sale_serializer.is_valid(raise_exception=True):
             sale_serializer.save()
+            cache.clear()
             return Response(sale_serializer.data)
         else:
             return Response({
