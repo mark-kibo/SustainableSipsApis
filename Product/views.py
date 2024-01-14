@@ -15,7 +15,6 @@ class ProductViewSet(ViewSet):
 
     queryset=Product.objects.all()
     
-    @method_decorator(never_cache)
     def list_products(self, request):
         """
         get all products
